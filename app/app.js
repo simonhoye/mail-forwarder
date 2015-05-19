@@ -12,7 +12,7 @@ var server = express();
 
 server.head('/webhook', function (req, res) {
     console.log('Received head request from webhook.');
-    res.send(200);
+    res.sendStatus(200);
 });
 
 server.post('/webhook', function (req, res) {
@@ -62,10 +62,10 @@ server.post('/webhook', function (req, res) {
         }, function (err) {
             if (err) {
                 console.log(err.stack);
-                res.send(500, 'Unable to write payload');
+                res.sendStatus(500, 'Unable to write payload');
             } else {
                 console.log('Webhook payload written.');
-                res.send(200);
+                res.sendStatus(200);
             }
         });
     });
