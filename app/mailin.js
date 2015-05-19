@@ -15,7 +15,7 @@ var mailin = require('mailin');
  * parsed message. */
 mailin.start({
     port: 25,
-    webhook: 'http://127.0.0.1/webhook',
+    webhook: 'http://127.0.0.1:3000/webhook',
     disableWebhook: false
 });
 
