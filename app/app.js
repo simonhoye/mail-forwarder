@@ -6,6 +6,8 @@ var fs = require('fs');
 var multiparty = require('multiparty');
 var util = require('util');
 
+var nodemailer = require('nodemailer');
+
 
 /* Make an http server to receive the webhook. */
 var server = express();
@@ -66,6 +68,15 @@ server.post('/webhook', function (req, res) {
             } else {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
+
+                var nodemailer = require('nodemailer');
+                var transporter = nodemailer.createTransport();
+                transporter.sendMail({
+                    from: 'admin@beardedmail.com',
+                    to: 'simonhoye@gmail.com',
+                    subject: 'You have BeardedMail',
+                    text: 'THIS IS A TEST'
+                });
             }
         });
     });
