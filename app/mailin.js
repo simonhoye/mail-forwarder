@@ -16,9 +16,7 @@ var mailin = require('mailin');
 mailin.start({
     port: 25,
     webhook: 'http://127.0.0.1/webhook',
-    disableWebhook: false,
-    logFile: '/root/mail-forwarder/log',
-    logLevel: 'info'
+    disableWebhook: false
 });
 
 /* Access simplesmtp server instance. */
