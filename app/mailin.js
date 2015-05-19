@@ -15,7 +15,10 @@ var mailin = require('mailin');
  * parsed message. */
 mailin.start({
     port: 25,
-    disableWebhook: true // Disable the webhook posting.
+    webhook: 'http://127.0.0.1/webhook',
+    disableWebhook: false,
+    logFile: '/root/mail-forwarder/log',
+    logLevel: 'info'
 });
 
 /* Access simplesmtp server instance. */
