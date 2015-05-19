@@ -1,0 +1,23 @@
+{
+  "name": "mail-forwarder",
+  "version": "1.0.0",
+  "description": "A mail forwarding app",
+  "main": "app/index.js",
+  "dependencies": {
+    "mailin": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonhoye/mail-forwarder.git"
+  },
+  "author": "simonhoye",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simonhoye/mail-forwarder/issues"
+  },
+  "homepage": "https://github.com/simonhoye/mail-forwarder"
+}
