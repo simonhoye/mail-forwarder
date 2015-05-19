@@ -45,6 +45,7 @@ mailin.on('startMessage', function (connection) {
 /* Event emitted after a message was received and parsed. */
 mailin.on('message', function (connection, data, content) {
     console.log(data);
+    
     /* Do something useful with the parsed message here.
      * Use parsed message `data` directly or use raw message `content`. */
 });
