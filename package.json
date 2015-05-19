@@ -2,7 +2,7 @@
   "name": "mail-forwarder",
   "version": "1.0.0",
   "description": "A mail forwarding app",
-  "main": "app/index.js",
+  "main": "app/app.js",
   "dependencies": {
     "mailin": "^1.0.1"
   },
