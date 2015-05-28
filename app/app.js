@@ -70,15 +70,15 @@ server.post('/webhook', function (req, res) {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
                 var msg = JSON.parse(fields.mailinMsg);
-                if (msg.mailinMsg.to[0].address == 'simon@beardedmail.com') {
+                if (msg.to[0].address == 'simon@beardedmail.com') {
                     var nodemailer = require('nodemailer');
                     var transporter = nodemailer.createTransport();
                     transporter.sendMail({
                         from: 'admin@beardedmail.com',
                         to: 'simonhoye@gmail.com',
-                        subject: 'You have BeardedMail from <'+msg.mailinMsg.from[0].address + ">",
-                        text: msg.mailinMsg.subject,
-                        html: msg.mailinMsg.html
+                        subject: 'You have BeardedMail from <'+msg.from[0].address + ">",
+                        text: msg.subject,
+                        html: msg.html
                     });
                 }
 
