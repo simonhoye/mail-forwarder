@@ -8,6 +8,8 @@ var util = require('util');
 
 var nodemailer = require('nodemailer');
 
+var mail;
+
 
 /* Make an http server to receive the webhook. */
 var server = express();
@@ -48,6 +50,8 @@ server.post('/webhook', function (req, res) {
             depth: 5
         }));
 
+        mail = fields;
+
         console.log('Parsed fields: ' + Object.keys(fields));
 
         /* Write down the payload for ulterior inspection. */
@@ -69,15 +73,15 @@ server.post('/webhook', function (req, res) {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
 
-                if (fields.mailinMsg.to[0].address == 'simon@beardedmail.com') {
+                if (mail.mailinMsg.to[0].address == 'simon@beardedmail.com') {
                     var nodemailer = require('nodemailer');
                     var transporter = nodemailer.createTransport();
                     transporter.sendMail({
                         from: 'admin@beardedmail.com',
                         to: 'simonhoye@gmail.com',
-                        subject: 'You have BeardedMail from <'+fields.mailinMsg.from[0].address + ">",
-                        text: fields.mailinMsg.subject,
-                        html: fields.mailinMsg.html
+                        subject: 'You have BeardedMail from <'+mail.mailinMsg.from[0].address + ">",
+                        text: mail.mailinMsg.subject,
+                        html: mail.mailinMsg.html
                     });
                 }
 
