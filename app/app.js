@@ -69,7 +69,7 @@ server.post('/webhook', function (req, res) {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
 
-                if (fields.mailinMsg.to.address === 'simon@beardedmail.com') {
+                if (fields.mailinMsg.to.address == 'simon@beardedmail.com') {
                     var nodemailer = require('nodemailer');
                     var transporter = nodemailer.createTransport();
                     transporter.sendMail({
