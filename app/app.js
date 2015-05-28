@@ -75,7 +75,7 @@ server.post('/webhook', function (req, res) {
                     transporter.sendMail({
                         from: 'admin@beardedmail.com',
                         to: 'simonhoye@gmail.com',
-                        subject: 'You have BeardedMail from '+fields.mailinMsg.from.address,
+                        subject: 'You have BeardedMail from <'+fields.mailinMsg.from[0].address + ">",
                         text: fields.mailinMsg.subject,
                         html: fields.mailinMsg.html
                     });
