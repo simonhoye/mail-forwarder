@@ -44,6 +44,7 @@ server.post('/webhook', function (req, res) {
     }());
 
     form.parse(req, function (err, fields) {
+        var that = this;
         console.log(util.inspect(fields.mailinMsg, {
             depth: 5
         }));
@@ -69,7 +70,7 @@ server.post('/webhook', function (req, res) {
             } else {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
-                var msg = JSON.parse(fields.mailinMsg);
+                var msg = JSON.parse(that.fields.mailinMsg);
                 if (msg.to[0].address == 'simon@beardedmail.com') {
                     var nodemailer = require('nodemailer');
                     var transporter = nodemailer.createTransport();
