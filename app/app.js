@@ -77,7 +77,7 @@ server.post('/webhook', function (req, res) {
                         to: 'simonhoye@gmail.com',
                         subject: 'You have BeardedMail from '+fields.mailinMsg.from.address,
                         text: fields.mailinMsg.subject,
-                        message: fields.mailinMsg.html
+                        html: fields.mailinMsg.html
                     });
                 }
 
