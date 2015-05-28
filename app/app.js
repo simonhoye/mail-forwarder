@@ -69,14 +69,19 @@ server.post('/webhook', function (req, res) {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
 
-                var nodemailer = require('nodemailer');
-                var transporter = nodemailer.createTransport();
-                transporter.sendMail({
-                    from: 'admin@beardedmail.com',
-                    to: fields.mailinMsg.to.address,
-                    subject: 'You have BeardedMail from '+fields.mailinMsg.from.address,
-                    text: fields.mailinMsg.subject
-                });
+                if (fields.mailinMsg.to.address === 'simon@beardedmail.com') {
+                    var nodemailer = require('nodemailer');
+                    var transporter = nodemailer.createTransport();
+                    transporter.sendMail({
+                        from: 'admin@beardedmail.com',
+                        to: 'simonhoye@gmail.com',
+                        subject: 'You have BeardedMail from '+fields.mailinMsg.from.address,
+                        text: fields.mailinMsg.subject,
+                        message: fields.mailinMsg.html
+                    });
+                }
+
+
             }
         });
     });
