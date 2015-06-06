@@ -44,7 +44,7 @@ server.post('/webhook', function (req, res) {
     }());
 
     form.parse(req, function (err, fields) {
-        var that = this;
+
         console.log(util.inspect(fields.mailinMsg, {
             depth: 5
         }));
@@ -54,6 +54,7 @@ server.post('/webhook', function (req, res) {
 
         /* Write down the payload for ulterior inspection. */
         async.auto({
+
             writeParsedMessage: function (cbAuto) {
                 fs.writeFile('payload.json', fields.mailinMsg, cbAuto);
             },
@@ -63,14 +64,14 @@ server.post('/webhook', function (req, res) {
                     fs.writeFile(attachment.generatedFileName, fields[attachment.generatedFileName], 'base64', cbEach);
                 }, cbAuto);
             }
-        }, function (err) {
+        }, function (err,fields) {
             if (err) {
                 console.log(err.stack);
                 res.sendStatus(500, 'Unable to write payload');
             } else {
                 console.log('Webhook payload written.');
                 res.sendStatus(200);
-                var msg = JSON.parse(that.fields.mailinMsg);
+                var msg = JSON.parse(fields.mailinMsg);
                 if (msg.to[0].address == 'simon@beardedmail.com') {
                     var nodemailer = require('nodemailer');
                     var transporter = nodemailer.createTransport();
