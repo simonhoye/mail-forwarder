@@ -63,14 +63,8 @@ server.post('/webhook', function (req, res) {
                 async.eachLimit(msg.attachments, 3, function (attachment, cbEach) {
                     fs.writeFile(attachment.generatedFileName, fields[attachment.generatedFileName], 'base64', cbEach);
                 }, cbAuto);
-            }
-        }, function (err,fields) {
-            if (err) {
-                console.log(err.stack);
-                res.sendStatus(500, 'Unable to write payload');
-            } else {
-                console.log('Webhook payload written.');
-                res.sendStatus(200);
+            },
+            sendEmail: function(cbAuto) {
                 var msg = JSON.parse(fields.mailinMsg);
                 if (msg.to[0].address == 'simon@beardedmail.com') {
                     var nodemailer = require('nodemailer');
@@ -83,6 +77,15 @@ server.post('/webhook', function (req, res) {
                         html: msg.html
                     });
                 }
+            }
+        }, function (err,fields) {
+            if (err) {
+                console.log(err.stack);
+                res.sendStatus(500, 'Unable to write payload');
+            } else {
+                console.log('Webhook payload written.');
+                res.sendStatus(200);
+
 
 
             }
