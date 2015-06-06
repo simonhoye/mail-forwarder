@@ -12,6 +12,20 @@ var nodemailer = require('nodemailer');
 /* Make an http server to receive the webhook. */
 var server = express();
 
+var validUsers = [
+    {
+        name: 'Simon',
+        beardedEmail: 'simon@beardedmail.com',
+        realEmail: 'simonhoye@gmail.com'
+    },
+    {
+        name: 'Brad',
+        beardedEmail: 'brad@beardedmail.com',
+        realEmail: 'bradmclean@gmail.com '
+    }
+]
+
+
 server.head('/webhook', function (req, res) {
     console.log('Received head request from webhook.');
     res.sendStatus(200);
@@ -66,16 +80,19 @@ server.post('/webhook', function (req, res) {
             },
             sendEmail: function(cbAuto) {
                 var msg = JSON.parse(fields.mailinMsg);
-                if (msg.to[0].address == 'simon@beardedmail.com') {
-                    var nodemailer = require('nodemailer');
-                    var transporter = nodemailer.createTransport();
-                    transporter.sendMail({
-                        from: 'admin@beardedmail.com',
-                        to: 'simonhoye@gmail.com',
-                        subject: 'You have BeardedMail from <'+msg.from[0].address + ">",
-                        text: msg.subject,
-                        html: msg.html
-                    });
+                for(var i=0; i < validUsers.length -1; i++) {
+                    if(validUsers[i].beardedEmail == msg.to[0].address) {
+                        var nodemailer = require('nodemailer');
+                        var transporter = nodemailer.createTransport();
+                        transporter.sendMail({
+                            from: 'admin@beardedmail.com',
+                            to: validUsers[i].realEmail,
+                            subject: 'Hey '+validUsers[i].name+'! You have BeardedMail from <'+msg.from[0].address + ">",
+                            text: msg.subject,
+                            html: msg.html
+                        });
+                    }
+
                 }
             }
         }, function (err,fields) {
