@@ -85,7 +85,7 @@ server.post('/webhook', function (req, res) {
                         var nodemailer = require('nodemailer');
                         var transporter = nodemailer.createTransport();
                         transporter.sendMail({
-                            from: 'admin@beardedmail.com',
+                            from: 'BeardedMail <admin@beardedmail.com>',
                             to: validUsers[i].realEmail,
                             subject: 'Hey '+validUsers[i].name+'! You have BeardedMail from <'+msg.from[0].address + ">",
                             text: msg.subject,
