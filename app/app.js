@@ -80,7 +80,7 @@ server.post('/webhook', function (req, res) {
             },
             sendEmail: function(cbAuto) {
                 var msg = JSON.parse(fields.mailinMsg);
-                for(var i=0; i < validUsers.length -1; i++) {
+                for(var i=0; i <= validUsers.length -1; i++) {
                     if(validUsers[i].beardedEmail == msg.to[0].address) {
                         var nodemailer = require('nodemailer');
                         var transporter = nodemailer.createTransport();
